@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+                      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="test: ${tests}" class="alert alert-info mt-2">
+    <h3 th:text = "${test.getTitle()}"></h3>
+    <h3 th:text = "${test.getDescription()}"></h3>
+    <div th:each="task: ${test.getTasks()}">
+        <h4 th:text="${task.question.getText()}"></h4>
+        <div th:each="answer: ${task.getAnswers()}">
+            <h5 th:text="${answer.getText()}"></h5>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package ru.shonin.EducationWebApp.entity;
 
 import lombok.Data;
+import ru.shonin.EducationWebApp.entity.testComponent.Test;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -24,4 +26,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @OneToMany()
+    private Set<Test> tests;
 }

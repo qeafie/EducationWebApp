@@ -23,4 +23,7 @@ public class Task {
     @ManyToOne()
     @JoinColumn(name = "testId")
     private Test test;
+
+    @OneToOne
+    private Answer rightAnswer;
 }

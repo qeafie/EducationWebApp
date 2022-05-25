@@ -15,9 +15,6 @@
     <header th:insert="blocks/header::header"></header>
 
     <main>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
 
         <div th:each="educationUser: ${educationUsers}" class="alert alert-info mt-2">
             <h3 th:text = "${educationUser.login}"></h3>

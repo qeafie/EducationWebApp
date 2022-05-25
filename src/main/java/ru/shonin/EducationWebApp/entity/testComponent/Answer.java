@@ -12,7 +12,6 @@ public class Answer {
     private Long id;
 
     private String text;
-    private boolean isRight;
 
     @ManyToOne
     @JoinColumn(name = "taskId")

@@ -1,0 +1,13 @@
+
+
+<div th:fragment="test(test)">
+    <h3 th:text = "${test.getTitle()}"></h3>
+    <h3 th:text = "${test.getAuthor()}"></h3>
+    <h3 th:text = "${test.getDescription()}"></h3>
+    <div th:each="task: ${test.getTasks()}">
+        <h4 th:text="${task.question.getText()}"></h4>
+        <div th:each="answer: ${task.getAnswers()}">
+            <h5 th:text="${answer.getText()}"></h5>
+        </div>
+    </div>
+</div>

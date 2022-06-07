@@ -45,21 +45,35 @@ public class TestController {
     public String addTest(
             @AuthenticationPrincipal User user,
             @RequestParam String title,
-            @RequestParam String description
+            @RequestParam String description,
+            @RequestParam String image,
+            Model model
     ){
-        Test test = new Test(title,description,user);
+        Test test = new Test(title,description,image,user);
         testRepository.save(test);
-        return "redirect:/";
+        return index(model);
     }
 
 
     @GetMapping("/test/{id}")
     public String test(@PathVariable(value = "id") Long id, Model model){
         Optional<Test> test = testRepository.findById(id);
+
+//        if(test.isEmpty())
+//            return "Error500.html";
+
         model.addAttribute("test",test.get());
         return "test";
     }
 
+    @GetMapping("/test/{id}/edit")
+    public String testEdit(@PathVariable(value = "id") Long id, Model model){
+        return "test-edit";
+    }
 
+    @GetMapping("/test/{id}/remove")
+    public String testRemove(@PathVariable(value = "id") Long id, Model model){
+        return "test-remove";
+    }
 
 }

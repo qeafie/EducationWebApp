@@ -1,6 +1,6 @@
 <div th:fragment = "test-card(test)">
     <div class="card mb-3" style="width: 18 rem;">
-        <img src="" alt="картинка">
+        <img class="card-img" height="100px" width="100px" th:src="${test.getImage()}" alt="картинка">
 
         <div class="card-body">
             <h5 th:text = "${test.getTitle()}"></h5>
@@ -9,8 +9,10 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
 
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <a th:href="'/test/' + ${test.getId()}" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a th:href="'/test/' + ${test.getId()} + '/edit'" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a th:href="'/test/' + ${test.getId()} + '/remove'" class="btn btn-sm btn-outline-secondary">Delete</a>
+
                 </div>
 
             </div>

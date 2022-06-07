@@ -26,7 +26,8 @@
 
 <div class="card-group justify-content-evenly">
     <div th:each="test: ${tests}">
-        <div th:insert="blocks/test-card(${test})"></div>
+        <div class="mb-5"
+                th:insert="blocks/test-card(${test})"></div>
     </div>
 </div>
 

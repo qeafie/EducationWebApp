@@ -16,6 +16,8 @@ public class Test {
     private  String title;
     private  String description;
 
+    private String image;
+
     @OneToMany(mappedBy = "test")
     private List<Task> tasks;
 
@@ -27,9 +29,10 @@ public class Test {
         return author!=null?author.getLogin():"<none>";
     }
 
-    public Test(String title, String description, User author) {
+    public Test(String title, String description, String image,  User author) {
         this.title = title;
         this.description = description;
+        this.image = image;
         this.author = author;
     }
 

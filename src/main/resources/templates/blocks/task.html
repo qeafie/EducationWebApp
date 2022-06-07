@@ -1,0 +1,13 @@
+<div th:fragment="task(task)">
+    <h3 th:text="${task.getId()}"></h3>
+
+    <h3>Вопрос: </h3>
+    <h4 th:text="${task.question.getText()}"></h4>
+
+    <h3>Варианты ответа</h3>
+    <div th:each="answer,iter : ${task.getAnswers()}">
+        <h4 th:text="${iter.count}"></h4>
+        <h5 th:text="${answer.getText()}"></h5>
+    </div>
+    <a th:href="'/test/'+${task.getTest().getId()}+'/task/' + ${task.getId()} + '/edit'">Редактировать</a>
+</div>

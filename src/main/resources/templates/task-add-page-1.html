@@ -13,21 +13,56 @@
 <header th:insert="blocks/header::header"></header>
 
 <div >
-    <form th:action="@{/test/${task.getTest().getId()}/task/${task.getId()}/add}" th:method="post">
+<!--     <form th:action="@{/test/{idTest}/task/add}" th:method="post">-->
+     <form th:action="@{'/test/'+${test.getId()} + '/task/add'}" th:method="post">
         <div class="mb-3">
             <label for="questionInput" class="form-label">Вопрос:</label>
-            <input type="text" class="form-control" id="questionInput" placeholder="Введите вопрос" name="question">
+            <input type="text" class="form-control" id="questionInput" placeholder="Введите вопрос" name="questionText">
         </div>
-        <div class="mb-3">
-            <label for="quantityAnswerInput" class="form-label">Количество вариантов ответа</label>
-            <select class="form-control" id="quantityAnswerInput" name="quantity">
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
-        <button th:type="submit" class="btn btn-primary">Продолжить</button>
+
+         <h2>Варианты ответа:</h2>
+         <div class="mb-3">
+             <label th:for="answer1" class="form-label" >Ответ 1</label>
+             <input type="text" class="form-control" th:id="answer1" placeholder="Введите ответ" th:name="answer1">
+         </div>
+
+         <div class="mb-3">
+             <label th:for="answer2" class="form-label" >Ответ 2</label>
+             <input type="text" class="form-control" th:id="answer2" placeholder="Введите ответ" th:name="answer2">
+         </div>
+
+         <div class="mb-3">
+             <label th:for="answer3" class="form-label" >Ответ 3</label>
+             <input type="text" class="form-control" th:id="answer3" placeholder="Введите ответ" th:name="answer3">
+         </div>
+
+         <div class="mb-3">
+             <label th:for="answer4" class="form-label" >Ответ 4</label>
+             <input type="text" class="form-control" th:id="answer4" placeholder="Введите ответ" th:name="answer4">
+         </div>
+
+         <div class="mb-3">
+             <label for="numberRightAnswer" class="form-label">Номер правильного ответа</label>
+             <select class="form-control" id="numberRightAnswer" name="numberOfRight">
+
+                 <option th:value="1" >1</option>
+                 <option th:value="2" >2</option>
+                 <option th:value="3" >3</option>
+                 <option th:value="4" >4</option>
+
+             </select>
+         </div>
+<!--        <div class="mb-3">-->
+<!--            <label for="quantityAnswerInput" class="form-label">Количество вариантов ответа</label>-->
+<!--            <select class="form-control" id="quantityAnswerInput" name="quantity">-->
+<!--&lt;!&ndash;                <option>2</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option>3</option>&ndash;&gt;-->
+<!--                <option>4</option>-->
+<!--&lt;!&ndash;                <option>5</option>&ndash;&gt;-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <button th:type="submit" class="btn btn-primary">Добавить</button>
     </form>
 </div>
 

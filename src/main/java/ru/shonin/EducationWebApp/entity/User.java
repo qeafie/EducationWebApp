@@ -3,6 +3,7 @@ package ru.shonin.EducationWebApp.entity;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.shonin.EducationWebApp.entity.testComponent.Attempt;
 import ru.shonin.EducationWebApp.entity.testComponent.Test;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ import java.util.Set;
 
 
 @Entity
-@Data
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
@@ -32,6 +32,8 @@ public class User implements UserDetails {
     @OneToMany()
     private Set<Test> tests;
 
+    @OneToMany
+    private List<Attempt> attempts;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -60,5 +62,62 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
     }
 }

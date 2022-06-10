@@ -10,4 +10,5 @@
         <h5 th:text="${answer.getText()}"></h5>
     </div>
     <a th:href="'/test/'+${task.getTest().getId()}+'/task/' + ${task.getId()} + '/edit'">Редактировать</a>
+    <a th:href="'/test/'+${task.getTest().getId()}+'/task/' + ${task.getId()} + '/remove'">Убрать</a>
 </div>

@@ -13,7 +13,7 @@
 <header th:insert="blocks/header::header"></header>
 
 <div >
-    <form th:action="@{/test/${task.getTest().getId()}/task/${task.getId()}/add-2}" th:method="post">
+    <form th:action="@{'/test/'+ ${idTest} +'/task/add-page-2'}" th:method="post">
         <div class="mb-3">
             <h2>Вопрос:</h2>
             <h4 th:text="${question.getText()}"></h4>
@@ -21,13 +21,21 @@
         <h2>Варианты ответа:</h2>
         <div th:each="answer,iter:${answers}">
             <div class="mb-3">
-                <label th:for="'answer'+${iter.count}" class="form-label">Вопрос:</label>
+                <label th:for="'answer'+${iter.count}" class="form-label" th:text="'Ответ '+ ${iter.count}"></label>
                 <input type="text" class="form-control" th:id="'answer'+${iter.count}" placeholder="Введите ответ" th:name="'answer'+${iter.count}">
             </div>
-            <div class="mb-3">
-                <label th:for="'isRight'+${iter.count}t" class="form-label">Правильный ответ?</label>
-                <input class="form-check-input" type="radio" name="isRight" th:id="'isRight'+${iter.count}" value="Правильный ответ" checked="">
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <label th:for="'isRight'+${iter.count}t" class="form-label">Правильный ответ?</label>-->
+<!--                <input class="form-check-input" type="radio" name="isRight" th:id="'isRight'+${iter.count}" value="Правильный ответ" checked="">-->
+<!--            </div>-->
+        </div>
+        <div class="mb-3">
+            <label for="numberRightAnswer" class="form-label">Номер правильного ответа</label>
+            <select class="form-control" id="numberRightAnswer" name="number">
+                <th:block th:each="answer,iter: ${answers}">
+                    <option th:value="${iter.count}" th:text="${iter.count}"></option>
+                </th:block>
+            </select>
         </div>
         <button th:type="submit" class="btn btn-primary">Добавить задание</button>
     </form>

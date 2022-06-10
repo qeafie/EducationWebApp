@@ -1,5 +1,11 @@
 <div th:fragment="tasks (tasks)">
+
+
+
+
     <div th:each="task : ${tasks}">
         <div th:insert="blocks/task::task (task=${task})"></div>
     </div>
+
+
 </div>

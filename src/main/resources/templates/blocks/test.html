@@ -8,10 +8,13 @@
     <h2>Описание:</h2>
     <h3 th:text = "${test.getDescription()}"></h3>
 <!--добавить вывод  попыток пользователя-->
-    <a href="#">Начать решать тест</a>
+    <form th:action="@{/current-attempt}">
+        <button type="submit">Начать решать тест</button>
+    </form>
     <br>
 
     <a th:href="${test.getId()} + '/tasks'">Список задач</a>
+    <a th:href="${test.getId()} + '/task/add'">Добавить задачу</a>
 
 
 

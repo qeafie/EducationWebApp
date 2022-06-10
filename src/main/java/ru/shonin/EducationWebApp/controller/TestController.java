@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.shonin.EducationWebApp.entity.User;
 import ru.shonin.EducationWebApp.entity.testComponent.Test;
+import ru.shonin.EducationWebApp.entity.testComponent.TestForm;
 import ru.shonin.EducationWebApp.repository.testComponent.TestRepository;
+import ru.shonin.EducationWebApp.service.TestService;
 
 import java.util.Optional;
 
@@ -19,6 +18,8 @@ public class TestController {
 
     @Autowired
     private TestRepository testRepository;
+    @Autowired
+    private TestService testService;
 
     @GetMapping("/tests")
     public String index(Model model){
@@ -76,4 +77,18 @@ public class TestController {
         return "test-remove";
     }
 
+
+    @GetMapping("/test/{id}/current-attempt")
+    public String Attempt(@PathVariable(value = "id") Long id, Model model){
+        //model.addAttribute("test",testRepository.findById(id).get());
+        model.addAttribute("testForm",testService.getTestForm(id));
+        return"attempt";
+    }
+    @PostMapping("/test/{id}/current-attempt")
+    public String Attempt(@PathVariable(value = "id") Long id,
+                          @ModelAttribute TestForm testForm){
+        System.out.println(testForm);
+        System.out.println(testForm.getTaskList());
+        return"result";
+    }
 }

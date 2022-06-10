@@ -12,12 +12,8 @@ import ru.shonin.EducationWebApp.repository.UserRepository;
 public class MainController {
     @Autowired
     private UserRepository userRepository;
-    @GetMapping("/")
-    public String greeting( Model model) {
-        return "greeting";
-    }
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String home(Model model){
         Iterable<User> educationUsers = userRepository.findAll();
         model.addAttribute("educationUsers",educationUsers);

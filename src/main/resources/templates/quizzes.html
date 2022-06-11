@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzes</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap JS + Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+
+<section>
+    <div class="mb-2" th:each="quiz:${quizzes}">
+        <h3 th:text="${quiz.getTitle()}"></h3>
+        <p th:text="${quiz.getDescription()}"></p>
+        <div class="d-flex flex-row align-content justify-content-around">
+            <form th:action="@{'/question/quiz/all/' + ${quiz.getId()}}" th:method="get" class="mb-2 mr-5">
+                <button class="btn btn-primary">Вопросы</button>
+            </form>
+
+            <form th:action="@{/quiz/update}" th:method="get" class="mb-2 mr-5">
+                <button class="btn btn-primary">Редактировать</button>
+            </form>
+
+            <form th:action="@{'/quiz/' + ${quiz.getId()}}" th:method="get" class="mb-2 mr-5">
+                <button class="btn btn-primary">Попытки</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>

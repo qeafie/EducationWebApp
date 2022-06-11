@@ -14,15 +14,23 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("/all")
+    public String allCategory(Model model){
 
+        model.addAttribute("categories", this.categoryService.getCategories());
+        return "categories";
+    }
     @GetMapping("/add")
-    public String addCategory(){
+    public String addCategory(Model model){
+
+        Category category = new Category();
+        model.addAttribute("category",category);
         return "add-category";
     }
     @PostMapping("/add")
-    public String addCategory(@RequestParam Category category){
+    public String addCategory(@ModelAttribute Category category){
         this.categoryService.addCategory(category);
-        return "categories";
+        return "redirect:/category/all";
     }
 
     @GetMapping("/{categoryId}")

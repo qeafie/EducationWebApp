@@ -15,7 +15,7 @@ public class Quiz {
     private String title;
     private String description;
     private String maxMarks;
-    private String numberOfQuestons;
+    private String numberOfQuestions;
 
     private boolean active = false;
 
@@ -60,12 +60,12 @@ public class Quiz {
         this.maxMarks = maxMarks;
     }
 
-    public String getNumberOfQuestons() {
-        return numberOfQuestons;
+    public String getNumberOfQuestions() {
+        return numberOfQuestions;
     }
 
-    public void setNumberOfQuestons(String numberOfQuestons) {
-        this.numberOfQuestons = numberOfQuestons;
+    public void setNumberOfQuestions(String numberOfQuestons) {
+        this.numberOfQuestions = numberOfQuestons;
     }
 
     public boolean isActive() {
@@ -90,5 +90,9 @@ public class Quiz {
 
     public void setQuestions(Set<QuestionWithOption> questions) {
         this.questions = questions;
+    }
+
+    public void addQuestion(QuestionWithOption question){
+        this.questions.add(question);
     }
 }

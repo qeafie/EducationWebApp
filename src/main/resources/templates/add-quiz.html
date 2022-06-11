@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Quiz</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap JS + Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<header th:insert="blocks/header::header"></header>
+
+<section>
+
+    <form th:action="@{/quiz/add}" th:method="post" th:object="${quiz}">
+        <h3>Добавление Теста</h3>
+
+        <div class="mb-3">
+            <label for="quizTitleInput">Название теста</label>
+            <div class="form-group" >
+                <input type="text" class="form-control"  id="quizTitleInput" placeholder="Название" th:field="*{title}">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="quizDescInput">Описание категории</label>
+            <div class="form-group">
+                <textarea  class="form-control" id="quizDescInput" rows="3" placeholder="Описание теста" th:field="*{description}"></textarea>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="maxMarksDescInput">Максимальная оценка</label>
+            <div class="form-group">
+                <input type="text" class="form-control" id="maxMarksDescInput"  placeholder="Максимальая оценка" th:field="*{maxMarks}">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="numberOfQuestionsInput">Количество вопросов</label>
+            <div class="form-group">
+                <input type="text" class="form-control" id="numberOfQuestionsInput"  placeholder="Количество вопросов" th:field="*{numberOfQuestions}">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="numberOfQuestionsInput">Сделать тест доступным для всех</label>
+            <div class="form-group">
+                <input type="radio"  th:value="true" class="form-check-input" id="radioInput1" name="radio" placeholder="Да" th:field="*{active}">
+                <p>Да</p>
+
+                <input type="radio" th:value="false" class="form-check-input" id="radioInput2"  name="radio" placeholder="Да" th:field="*{active}">
+                <p>Нет</p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="numberOfQuestionsInput">Выберите категорию</label>
+            <div class="form-group">
+                <select class="form-control" id="select" th:name="categoryId">
+                    <div th:each="category:${categories}">
+                        <option th:text="${category.title}" th:value="${category.getId()}">
+
+                        </option>
+                    </div>
+
+                </select>
+                </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Добавить тест</button>
+    </form>
+
+</section>
+
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>

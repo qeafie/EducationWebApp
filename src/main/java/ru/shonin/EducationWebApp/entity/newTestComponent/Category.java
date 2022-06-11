@@ -51,4 +51,12 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Category getCategory(){
+        return this;
+    }
+
+    public void addQuiz(Quiz quiz){
+        this.quizzes.add(quiz);
+    }
 }

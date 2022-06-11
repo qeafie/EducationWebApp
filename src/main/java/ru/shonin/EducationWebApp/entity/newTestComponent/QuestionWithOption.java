@@ -86,4 +86,13 @@ public class QuestionWithOption {
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
+
+    public String getAnswerByNumber(Long answerNumber) {
+        if (answerNumber==1) return option1;
+        if (answerNumber==2) return option2;
+        if (answerNumber==3) return option3;
+        if (answerNumber==4) return option4;
+
+        return "";
+    }
 }

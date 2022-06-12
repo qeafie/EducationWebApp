@@ -1,19 +1,24 @@
 package ru.shonin.EducationWebApp.controller.newControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.shonin.EducationWebApp.entity.Attempt;
+import ru.shonin.EducationWebApp.entity.User;
 import ru.shonin.EducationWebApp.entity.newTestComponent.Category;
 import ru.shonin.EducationWebApp.entity.newTestComponent.QuestionWithOption;
 import ru.shonin.EducationWebApp.entity.newTestComponent.Quiz;
 import ru.shonin.EducationWebApp.entity.newTestComponent.QuizForm;
+import ru.shonin.EducationWebApp.service.AttemptService;
 import ru.shonin.EducationWebApp.service.CategoryService;
 import ru.shonin.EducationWebApp.service.QuestionWithOptionService;
 import ru.shonin.EducationWebApp.service.QuizService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/quiz")
@@ -26,6 +31,10 @@ public class QuizController {
 
     @Autowired
     private QuestionWithOptionService questionService;
+
+    @Autowired
+    private AttemptService attemptService;
+
 
 
     @GetMapping("/all")
@@ -103,10 +112,19 @@ public class QuizController {
     @PostMapping("/{quizId}/start")
     public String start(@PathVariable Long quizId,
                         Model model,
-                        @ModelAttribute QuizForm quizForm){
+                        @ModelAttribute QuizForm quizForm,
+                        @AuthenticationPrincipal User user){
         Quiz quiz = this.quizService.getQuiz(quizId);
+        List<QuestionWithOption> list = this.questionService.getQuestionWithFormAnswer(quiz,quizForm);
+        int result =this.quizService.getResult(quiz,quizForm);
 
-        model.addAttribute("result", this.quizService.getResult(quiz,quizForm));
+        Attempt attempt = this.attemptService.addAttempt(new Attempt(quiz,user,result));
+
+        model.addAttribute("percent",(100-this.attemptService.getPercent(quiz,attempt)));
+        model.addAttribute("result", result);
+        model.addAttribute("attempt",attempt);
+        model.addAttribute("maxResult", quiz.getMaxMarks());
+        model.addAttribute("questions",list);
         //добавить попытки
         return "view-result";
     }

@@ -1,9 +1,12 @@
 package ru.shonin.EducationWebApp.entity.newTestComponent;
 
 
+import ru.shonin.EducationWebApp.entity.Attempt;
+
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,8 +18,8 @@ public class Quiz {
 
     private String title;
     private String description;
-    private String maxMarks;
-    private String numberOfQuestions;
+    private int maxMarks;
+    private int numberOfQuestions;
 
 
 
@@ -25,8 +28,11 @@ public class Quiz {
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<QuestionWithOption> questions =new HashSet<>();
+    @OneToMany( mappedBy = "quiz",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<QuestionWithOption> questions = new HashSet<>();
+
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Attempt> attempts = new ArrayList<>();
 
     public Quiz() {
     }
@@ -55,19 +61,19 @@ public class Quiz {
         this.description = description;
     }
 
-    public String getMaxMarks() {
+    public int getMaxMarks() {
         return maxMarks;
     }
 
-    public void setMaxMarks(String maxMarks) {
+    public void setMaxMarks(int maxMarks) {
         this.maxMarks = maxMarks;
     }
 
-    public String getNumberOfQuestions() {
-        return numberOfQuestions;
+    public int getNumberOfQuestions() {
+        return this.questions.size();
     }
 
-    public void setNumberOfQuestions(String numberOfQuestons) {
+    public void setNumberOfQuestions(int numberOfQuestons) {
         this.numberOfQuestions = numberOfQuestons;
     }
 
@@ -99,10 +105,15 @@ public class Quiz {
         this.questions.add(question);
     }
 
-    public int getScoresForQuiz(){
-        return Integer.parseInt(maxMarks)/Integer.parseInt(numberOfQuestions);
+    public int getScoresForQuestion(){
+        return maxMarks/questions.size();
     }
-    public int getTime(){
-        return Integer.parseInt(numberOfQuestions)*2;
-    }
+
+//    public List<Attempt> getAttempts() {
+//        return attempts;
+//    }
+//
+//    public void setAttempts(List<Attempt> attempts) {
+//        this.attempts = attempts;
+//    }
 }

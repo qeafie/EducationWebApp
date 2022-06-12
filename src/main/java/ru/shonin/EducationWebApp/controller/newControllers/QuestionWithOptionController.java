@@ -61,8 +61,8 @@ public class QuestionWithOptionController {
         Quiz quiz = this.quizService.getQuiz(quizID);
         Set<QuestionWithOption> questions = quiz.getQuestions();
         List list = new ArrayList(questions);
-        if (list.size()>Integer.parseInt(quiz.getNumberOfQuestions())){
-            list = list.subList(0,Integer.parseInt(quiz.getNumberOfQuestions()+1));
+        if (list.size()>quiz.getNumberOfQuestions()){
+            list = list.subList(0,quiz.getNumberOfQuestions()+1);
         }
         Collections.shuffle(list);
         model.addAttribute("Questions",list);

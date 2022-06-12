@@ -66,11 +66,14 @@ public class QuizServiceImpl implements QuizService {
         Set<QuestionWithOption> questions = quiz.getQuestions();
         List<QuestionWithOption> quizFormQuestions = quizForm.getQuestions();
         int count = 0;
-        for (QuestionWithOption question:quizFormQuestions){
-            for (QuestionWithOption questionWithAnswer :questions){
+        final int STEP = quiz.getScoresForQuestion();
+        for (QuestionWithOption question : quizFormQuestions){
+            for (QuestionWithOption questionWithAnswer : questions){
+
                 if(question.getId() == questionWithAnswer.getId()){
-                    if(question.getFormAnswer().equals(questionWithAnswer.getAnswer()))
-                        count++;
+                    if(question.getFormAnswer()!=null&&
+                            question.getFormAnswer().equals(questionWithAnswer.getAnswer()))
+                        count+=STEP;
                 }
             }
         }

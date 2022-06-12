@@ -32,7 +32,7 @@
             <h5 th:text="${quiz.category.title}"></h5>
             <p th:text="${quiz.description}"></p>
 
-            <form th:action="@{'/quiz/' + ${quiz.getId()}+'/start'}" th:method="get" class="mb-2 mr-5">
+            <form th:action="@{'/quiz/instruction/' + ${quiz.getId()}}" th:method="get" class="mb-2 mr-5">
                 <button class="btn btn-primary">Решить тест</button>
             </form>
         </div>

@@ -2,7 +2,8 @@ package ru.shonin.EducationWebApp.service;
 
 import ru.shonin.EducationWebApp.entity.newTestComponent.QuestionWithOption;
 import ru.shonin.EducationWebApp.entity.newTestComponent.Quiz;
-import ru.shonin.EducationWebApp.entity.testComponent.Question;
+import ru.shonin.EducationWebApp.entity.newTestComponent.QuizForm;
+
 
 import java.util.List;
 import java.util.Set;
@@ -16,4 +17,6 @@ public interface QuestionWithOptionService {
     public void deleteQuestion(Long idQuestion);
 
     public List<QuestionWithOption> getShuffleQuestionOfQuiz(Quiz quiz);
+
+    public List<QuestionWithOption> getQuestionWithFormAnswer(Quiz quiz, QuizForm quizForm);
 }

@@ -26,11 +26,11 @@
             <div>
                 <h3 class="mt-5">Небольшая инструкция</h3>
                 <ul>
-                    <li th:utext="'В этом тесте <b>'+${quiz.numberOfQuestions} +'</b> вопросов'"></li>
+                    <li th:utext="'В этом тесте <b>'+${quiz.questions.size()} +'</b> вопрос(a,ов)'"></li>
                     <li>В каждом вопросе лишь один правильный ответ</li>
                     <li>На вопросы можно отвечать не по порядку</li>
 <!--                    <li th:utext="'У тебя есть <b>'+${quiz.getTime()}+' </b> минут чтобы пройти тест'"></li>-->
-                    <li th:utext="'Каждый ответ приносит <b>'+ ${quiz.getScoresForQuiz()} +'</b> баллов'"></li>
+                    <li th:utext="'Каждый ответ приносит <b>'+ ${quiz.getScoresForQuestion()} +'</b> баллов'"></li>
 
                 </ul>
 

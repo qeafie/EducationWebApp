@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title th:text="${currentCategory}"></title>
+    <title>Result</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Bootstrap JS + Popper JS -->
@@ -14,7 +14,45 @@
 <header th:insert="blocks/header::header"></header>
 
 <section>
-    <h3 th:text="${result}"></h3>
+    <h3 th:utext="'Ваш счёт: <b>'+${result}+'</b> / '+ ${maxResult}"></h3>
+<!--    возможно добавить место в таблице
+мол это лучше чем у % пользователей-->
+    <div class="mt-2" th:each="question:${questions}">
+        <h3 th:text="${question.getContent()}"></h3>
+        <div class="d-flex justify-content-around">
+            <div class="d-flex m-2">
+                <h4>Ответ 1</h4>
+                <p th:text="${question.getOption1()}"></p>
+            </div>
+
+            <div class="d-flex m-2">
+                <h4>Ответ 2</h4>
+                <p th:text="${question.getOption2()}"></p>
+            </div>
+
+            <div class="d-flex m-2">
+                <h4>Ответ 3</h4>
+                <p th:text="${question.getOption3()}"></p>
+            </div>
+
+            <div class="d-flex m-2">
+                <h4>Ответ 4</h4>
+                <p th:text="${question.getOption4()}"></p>
+            </div>
+        </div>
+
+        <div>
+            <h3>Правильный ответ</h3>
+            <p th:text="${question.answer}"></p>
+        </div>
+
+        <div>
+            <h3>Ваш ответ</h3>
+            <p th:text="${question.formAnswer}" class="text-success" th:if="${question.answer.equals(question.formAnswer)}"></p>
+            <p th:text="${question.formAnswer}" class="text-danger" th:unless="${question.answer.equals(question.formAnswer)}"></p>
+        </div>
+    </div>
+
 </section>
 
 <footer th:insert="blocks/footer::footer"></footer>

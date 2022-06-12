@@ -1,10 +1,7 @@
 package ru.shonin.EducationWebApp.entity;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.shonin.EducationWebApp.entity.testComponent.Attempt;
-import ru.shonin.EducationWebApp.entity.testComponent.Test;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -29,10 +26,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany()
-    private Set<Test> tests;
-
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Attempt> attempts;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,11 +107,11 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public Set<Test> getTests() {
-        return tests;
+    public List<Attempt> getAttempts() {
+        return attempts;
     }
 
-    public void setTests(Set<Test> tests) {
-        this.tests = tests;
+    public void setAttempts(List<Attempt> attempts) {
+        this.attempts = attempts;
     }
 }

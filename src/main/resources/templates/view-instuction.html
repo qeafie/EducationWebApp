@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title th:text="${currentCategory}"></title>
+    <title >Instruction</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Bootstrap JS + Popper JS -->
@@ -14,24 +14,27 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 
-<div class="nav nav-tabs" >
-<!--    добавить ссылки на категории-->
-
-    <a th:if="${currentCategory == 'All'}" class="nav-item nav-link active"  href="/quiz/active">Все категории</a>
-    <a th:if="${currentCategory != 'All'}" class="nav-item nav-link"  href="/quiz/active">Все категории</a>
-    <th:block th:each="category:${categories}">
-        <a th:if="${currentCategory != category.title }" class="nav-item nav-link" th:text="${category.title}" th:href="'/quiz/category/active/'+${category.getId()}"></a>
-        <a th:if="${currentCategory == category.title }" class="nav-item nav-link active" th:text="${category.title}" th:href="'/quiz/category/active/'+${category.getId()}"></a>
-    </th:block>
-
-</div>
 <section>
-    <div class="m-2 " th:each="quiz:${quizzes}">
+    <div class="m-2 ">
         <div>
             <h3 th:text="${quiz.title}"></h3>
             <h5 th:text="${quiz.category.title}"></h5>
             <p th:text="${quiz.description}"></p>
 
+            <hr>
+
+            <div>
+                <h3 class="mt-5">Небольшая инструкция</h3>
+                <ul>
+                    <li th:utext="'В этом тесте <b>'+${quiz.numberOfQuestions} +'</b> вопросов'"></li>
+                    <li>В каждом вопросе лишь один правильный ответ</li>
+                    <li>На вопросы можно отвечать не по порядку</li>
+<!--                    <li th:utext="'У тебя есть <b>'+${quiz.getTime()}+' </b> минут чтобы пройти тест'"></li>-->
+                    <li th:utext="'Каждый ответ приносит <b>'+ ${quiz.getScoresForQuiz()} +'</b> баллов'"></li>
+
+                </ul>
+
+            </div>
             <form th:action="@{'/quiz/' + ${quiz.getId()}+'/start'}" th:method="get" class="mb-2 mr-5">
                 <button class="btn btn-primary">Решить тест</button>
             </form>

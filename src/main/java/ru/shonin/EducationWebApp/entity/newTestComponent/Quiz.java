@@ -2,6 +2,7 @@ package ru.shonin.EducationWebApp.entity.newTestComponent;
 
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ public class Quiz {
     private String description;
     private String maxMarks;
     private String numberOfQuestions;
+
+
 
     private boolean active = false;
 
@@ -94,5 +97,12 @@ public class Quiz {
 
     public void addQuestion(QuestionWithOption question){
         this.questions.add(question);
+    }
+
+    public int getScoresForQuiz(){
+        return Integer.parseInt(maxMarks)/Integer.parseInt(numberOfQuestions);
+    }
+    public int getTime(){
+        return Integer.parseInt(numberOfQuestions)*2;
     }
 }

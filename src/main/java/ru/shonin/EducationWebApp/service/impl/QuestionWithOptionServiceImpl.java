@@ -8,8 +8,8 @@ import ru.shonin.EducationWebApp.entity.testComponent.Question;
 import ru.shonin.EducationWebApp.repository.newTestComponent.QuestionWithOptionRepository;
 import ru.shonin.EducationWebApp.service.QuestionWithOptionService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 @Service
 public class QuestionWithOptionServiceImpl implements QuestionWithOptionService {
 
@@ -45,5 +45,17 @@ public class QuestionWithOptionServiceImpl implements QuestionWithOptionService 
         QuestionWithOption question = new QuestionWithOption();
         question.setId(idQuestion);
         this.questionRepository.delete(question);
+    }
+
+    @Override
+    public List<QuestionWithOption> getShuffleQuestionOfQuiz(Quiz quiz) {
+
+        List<QuestionWithOption> list = new ArrayList<>(this.questionRepository.findByQuiz(quiz));
+        if (list.size()>Integer.parseInt(quiz.getNumberOfQuestions())){
+            list = list.subList(0,Integer.parseInt(quiz.getNumberOfQuestions()+1));
+        }
+        Collections.shuffle(list);
+
+        return list;
     }
 }

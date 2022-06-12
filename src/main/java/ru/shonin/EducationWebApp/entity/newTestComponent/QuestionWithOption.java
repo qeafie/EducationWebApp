@@ -17,6 +17,18 @@ public class QuestionWithOption {
 
     private String answer;
 
+
+    @Transient
+    private String formAnswer;
+
+    public String getFormAnswer() {
+        return formAnswer;
+    }
+
+    public void setFormAnswer(String formAnswer) {
+        this.formAnswer = formAnswer;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     private  Quiz quiz;
 

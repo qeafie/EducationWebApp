@@ -25,12 +25,13 @@
     </th:block>
 
 </div>
-<section>
-    <div class="m-2 " th:each="quiz:${quizzes}">
-        <div>
-            <h3 th:text="${quiz.title}"></h3>
-            <h5 th:text="${quiz.category.title}"></h5>
-            <p th:text="${quiz.description}"></p>
+<section class="container">
+    <div class="m-2 row card bg-light mb-3" th:each="quiz:${quizzes}">
+        <div class="card-body">
+            <h4 class="card-title" th:text="${quiz.title}"></h4>
+            <hr>
+            <h5 class="card-subtitle mb-2 text-muted" th:text="${quiz.category.title}"></h5>
+            <p class="card-text" th:text="${quiz.description}"></p>
 
             <form th:action="@{'/quiz/instruction/' + ${quiz.getId()}}" th:method="get" class="mb-2 mr-5">
                 <button class="btn btn-primary">Решить тест</button>

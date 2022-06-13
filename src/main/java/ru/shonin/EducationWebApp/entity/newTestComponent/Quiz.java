@@ -19,8 +19,6 @@ public class Quiz {
     private String title;
     private String description;
     private int maxMarks;
-    private int numberOfQuestions;
-
 
 
     private boolean active = false;
@@ -73,9 +71,7 @@ public class Quiz {
         return this.questions.size();
     }
 
-    public void setNumberOfQuestions(int numberOfQuestons) {
-        this.numberOfQuestions = numberOfQuestons;
-    }
+
 
     public boolean isActive() {
         return active;

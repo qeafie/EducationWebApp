@@ -19,9 +19,9 @@
 <!--                <button type="button" class="btn btn-outline-light me-2">Login</button>-->
 <!--                <button type="button" class="btn btn-warning">Sign-up</button>-->
 
-                <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                <h1 th:inline="text">Привет [[${#httpServletRequest.remoteUser}]]!</h1>
                 <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out" class="btn btn-warning" />
+                    <input type="submit" value="Выйти из аккаунта" class="btn btn-warning" />
                 </form>
             </div>
         </div>

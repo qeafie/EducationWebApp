@@ -13,39 +13,63 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 
-<section>
-    <h3 th:utext="'Ваш счёт: <b>'+${result}+'</b> / '+ ${maxResult}"></h3>
-    <hr>
-    <h4 th:utext="'Ваша попытка лучше <b>' + ${percent} + ' </b> % попыток пользователей'"></h4>
+<section class="container">
+
+    <div class="row">
+        <div class="alert alert-primary mt-3">
+            <h3 class="alert-heading">Поздравляю с завершением теста, ваша попытка сохранена</h3>
+            <hr>
+            <ul>
+                <li><h4 th:utext="'Ваш счёт: <b>'+${result}+'</b> / '+ ${maxResult}"></h4></li>
+                <li><h4 th:utext="'Ваша попытка оказалась лучше <b>' + ${percent} + ' </b> % попыток пользователей'"></h4></li>
+                <li><h4 th:utext="'Правильных ответов : <b>'+${percentOfSuccess}+'</b> %'"></h4></li>
+            </ul>
+
+        </div>
+    </div>
 
 
-    <div class="mt-2" th:each="question:${questions}">
-        <h3 th:text="${question.getContent()}"></h3>
-        <div class="d-flex justify-content-around">
-            <div class="d-flex m-2">
-                <h4>Ответ 1</h4>
-                <p th:text="${question.getOption1()}"></p>
-            </div>
 
-            <div class="d-flex m-2">
-                <h4>Ответ 2</h4>
-                <p th:text="${question.getOption2()}"></p>
-            </div>
+<!-- Добавить процент правильных ответов    <h4 th:utext="'Ваша результативность <b>' + ${percent} + ' </b> % "></h4>-->
 
-            <div class="d-flex m-2">
-                <h4>Ответ 3</h4>
-                <p th:text="${question.getOption3()}"></p>
-            </div>
 
-            <div class="d-flex m-2">
-                <h4>Ответ 4</h4>
-                <p th:text="${question.getOption4()}"></p>
+    <div class="m-2 row card bg-light mb-3" th:each="question:${questions}">
+
+        <h3 class="card-header" th:text="${question.getContent()}"></h3>
+        <div class="card-body">
+            <div class="d-flex justify-content-around align-items-center">
+
+                <div class="d-flex m-2 flex-column align-items-center">
+                    <div class="d-flex m-2  flex-column align-items-center">
+                        <h4 class="">Вариант 1</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption1()}"></h5>
+                    </div>
+
+                    <div class="d-flex m-2 flex-column align-items-center">
+                        <h4>Вариант 2</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption2()}"></h5>
+                    </div>
+
+                </div>
+
+                <div class="d-flex m-2 flex-column align-items-center">
+                    <div class="d-flex m-2 flex-column  align-items-center">
+                        <h4>Вариант 3</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption3()}"></h5>
+                    </div>
+
+                    <div class="d-flex m-2 flex-column align-items-center">
+                        <h4>Вариант 4</h4>
+                        <h5 class="text-secondary"  th:text="${question.getOption4()}"></h5>
+                    </div>
+
+                </div>
             </div>
         </div>
 
         <div>
-            <h3>Правильный ответ</h3>
-            <p th:text="${question.answer}"></p>
+            <h4>Правильный ответ</h4>
+            <p class="text-secondary" th:text="${question.answer}"></p>
         </div>
 
         <div>
@@ -53,8 +77,12 @@
             <p th:text="${question.formAnswer}" class="text-success" th:if="${question.answer.equals(question.formAnswer)}"></p>
             <p th:text="${question.formAnswer}" class="text-danger" th:unless="${question.answer.equals(question.formAnswer)}"></p>
         </div>
+
     </div>
 
+    <form th:action="@{'/quiz/' + ${quizId}+'/start'}" th:method="get" class="row mb-2 mr-5">
+        <button class="btn btn-info text-light">Попробовать ещё раз</button>
+    </form>
 </section>
 
 <footer th:insert="blocks/footer::footer"></footer>

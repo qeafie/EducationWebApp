@@ -123,6 +123,7 @@ public class QuizController {
         Attempt attempt = this.attemptService.addAttempt(new Attempt(quiz,user,result));
 
         model.addAttribute("percent",this.attemptService.getPercent(quiz,attempt));
+        model.addAttribute("percentOfSuccess",(result*100/quiz.getMaxMarks()));
         model.addAttribute("result", result);
         model.addAttribute("attempt",attempt);
         model.addAttribute("maxResult", quiz.getMaxMarks());

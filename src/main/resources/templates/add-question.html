@@ -13,66 +13,78 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 
-<section>
+<section class="container">
+    <div class="row mt-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-7 card text-center">
+            <form th:action="@{'/question/'+${quizId}+'/add'}" th:method="post" th:object="${question}">
+               <div class="card-header">
+                   <h3>Добавление вопроса</h3>
+               </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="contentInput">Вопрос</label>
+                        <div class="form-group" >
+                            <input type="text" class="form-control"  id="contentInput" placeholder="Вопрос" th:field="*{content}">
+                        </div>
+                    </div>
 
-    <form th:action="@{'/question/'+${quizId}+'/add'}" th:method="post" th:object="${question}">
-        <h3>Добавление вопроса</h3>
+                    <div>
+                        <div class="mb-3">
+                            <label for="option1Input">Ответ 1</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="option1Input"  placeholder="Ответ 1" th:field="*{option1}" >
+                            </div>
+                        </div>
 
-        <div class="mb-3">
-            <label for="contentInput">Вопрос</label>
-            <div class="form-group" >
-                <input type="text" class="form-control"  id="contentInput" placeholder="Вопрос" th:field="*{content}">
-            </div>
+                        <div class="mb-3">
+                            <label for="option2Input">Ответ 2</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="option2Input"  placeholder="Ответ 2" th:field="*{option2}" >
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="option3Input">Ответ 3</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="option3Input"  placeholder="Ответ 3" th:field="*{option3}" >
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="option4Input">Ответ 4</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="option4Input"  placeholder="Ответ 4" th:field="*{option4}" >
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="answerInput">Выберите правильный ответ</label>
+                        <div class="form-group">
+                            <select class="form-control" id="answerInput"  th:name="answerNumber">
+                                <option th:value="${1}" >1</option>
+
+                                <option th:value="${2}">2</option>
+
+                                <option th:value="${3}">3</option>
+
+                                <option th:value="${4}">4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+
+                    <button type="submit" class="btn btn-success">Добавить тест</button>
+                </div>
+            </form>
         </div>
+        <div class="col-md-2"></div>
+    </div>
 
-        <div>
-            <div class="mb-3">
-                <label for="option1Input">Ответ 1</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="option1Input"  placeholder="Ответ 1" th:field="*{option1}" >
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="option2Input">Ответ 1</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="option2Input"  placeholder="Ответ 2" th:field="*{option2}" >
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="option3Input">Ответ 1</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="option3Input"  placeholder="Ответ 3" th:field="*{option3}" >
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="option4Input">Ответ 1</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="option4Input"  placeholder="Ответ 4" th:field="*{option4}" >
-                </div>
-            </div>
-        </div>
-
-
-        <div class="mb-3">
-            <label for="answerInput">Выберите правильный ответ</label>
-            <div class="form-group">
-                <select class="form-control" id="answerInput"  th:name="answerNumber">
-                    <option th:value="${1}" >1</option>
-
-                    <option th:value="${2}">2</option>
-
-                    <option th:value="${3}">3</option>
-
-                    <option th:value="${4}">4</option>
-                </select>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-success">Добавить тест</button>
-    </form>
 
 </section>
 

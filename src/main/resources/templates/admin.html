@@ -14,26 +14,50 @@
 <header th:insert="blocks/header::header"></header>
 
 
-<section class="row px-5">
-    <div class="col-md-6">
-        <form th:action="@{/category/all}" th:method="get" class="mb-2">
-            <button class="btn btn-primary">Categories</button>
-        </form>
+<section class="container">
 
-        <form th:action="@{/category/add}" th:method="get" class="mb-2">
-            <button class="btn btn-info">Add categories</button>
-        </form>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="alert alert-primary">
+                <h3 class="alert-heading">Управление Категориями</h3>
+                <hr>
+                <div class="d-flex flex-column align-items-center">
+                    <form th:action="@{/category/all}" th:method="get" class="mb-2 center-block">
+                        <button class="btn btn-primary">Все категории</button>
+                    </form>
+
+                    <form th:action="@{/category/add}" th:method="get" class="mb-2 center-block">
+                        <button class="btn btn-info">Добавить Категорию</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 ">
+
+            <div class="alert alert-info">
+                <h3 class="alert-heading">Управление Тестами</h3>
+                <hr>
+                <div class="d-flex flex-column align-items-center">
+                    <form th:action="@{/quiz/all}" th:method="get" class="mb-2">
+                        <button class="btn btn-primary">Все Тесты</button>
+                    </form>
+
+                    <form th:action="@{/quiz/add}" th:method="get" class="mb-2">
+                        <button class="btn btn-info">Добавить Тест</button>
+                    </form>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
     </div>
 
-    <div class="col-md-6 ">
-        <form th:action="@{/quiz/all}" th:method="get" class="mb-2">
-            <button class="btn btn-primary">Quizzes</button>
-        </form>
-
-        <form th:action="@{/quiz/add}" th:method="get" class="mb-2">
-            <button class="btn btn-info">Add quiz</button>
-        </form>
-    </div>
 </section>
 
 

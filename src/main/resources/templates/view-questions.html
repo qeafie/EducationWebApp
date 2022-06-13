@@ -13,45 +13,55 @@
 <body>
 <header th:insert="blocks/header::header"></header>
 
-<section>
-    <div class="mb-2" th:each="question:${questions}">
-        <h3 th:text="${question.getContent()}"></h3>
-        <div class="d-flex justify-content-around">
-            <div class="d-flex m-2">
-                <h4>Ответ 1</h4>
-                <p th:text="${question.getOption1()}"></p>
-            </div>
+<section class="container">
+    <div class="m-2 row card bg-light mb-3" th:each="question:${questions}">
 
-            <div class="d-flex m-2">
-                <h4>Ответ 2</h4>
-                <p th:text="${question.getOption2()}"></p>
-            </div>
+        <h3 class="card-header" th:text="${question.getContent()}"></h3>
+        <div class="card-body">
+            <div class="d-flex justify-content-around align-items-center">
 
-            <div class="d-flex m-2">
-                <h4>Ответ 3</h4>
-                <p th:text="${question.getOption3()}"></p>
-            </div>
+                <div class="d-flex m-2 flex-column align-items-center">
+                    <div class="d-flex m-2  flex-column align-items-center">
+                        <h4 class="">Вариант 1</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption1()}"></h5>
+                    </div>
 
-            <div class="d-flex m-2">
-                <h4>Ответ 4</h4>
-                <p th:text="${question.getOption4()}"></p>
+                    <div class="d-flex m-2 flex-column align-items-center">
+                        <h4>Вариант 2</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption2()}"></h5>
+                    </div>
+
+                </div>
+
+                <div class="d-flex m-2 flex-column align-items-center">
+                    <div class="d-flex m-2 flex-column  align-items-center">
+                        <h4>Вариант 3</h4>
+                        <h5 class="text-secondary" th:text="${question.getOption3()}"></h5>
+                    </div>
+
+                    <div class="d-flex m-2 flex-column align-items-center">
+                        <h4>Вариант 4</h4>
+                        <h5 class="text-secondary"  th:text="${question.getOption4()}"></h5>
+                    </div>
+
+                </div>
             </div>
         </div>
 
        <div>
-           <h3>Правильный ответ</h3>
-           <p th:text="${question.answer}"></p>
+           <h4>Правильный ответ</h4>
+           <p class="text-success" th:text="${question.answer}"></p>
        </div>
 
 
-        <form th:action="@{/category/update}" th:method="get" class="mb-2 mr-5">
+        <form  th:action="@{/category/update}" th:method="get" class=" mb-2 mr-5">
             <button class="btn btn-primary">Редактировать</button>
         </form>
 
     </div>
 
-    <form th:action="@{'/question/'+${quizId}+'/add'}" th:method="get" class="mb-2 mr-5">
-        <button class="btn btn-info">Добавить вопрос</button>
+    <form th:action="@{'/question/'+${quizId}+'/add'}" th:method="get" class="row mb-2 mr-5">
+        <button class="btn btn-info text-light">Добавить вопрос</button>
     </form>
 
 </section>

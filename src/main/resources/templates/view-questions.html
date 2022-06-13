@@ -54,7 +54,7 @@
        </div>
 
 
-        <form  th:action="@{/category/update}" th:method="get" class=" mb-2 mr-5">
+        <form  th:action="@{'/question/edit/'+${question.getId()}}" th:method="get" class=" mb-2 mr-5">
             <button class="btn btn-primary">Редактировать</button>
         </form>
 

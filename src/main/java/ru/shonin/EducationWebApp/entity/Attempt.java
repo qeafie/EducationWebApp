@@ -18,19 +18,19 @@ public class Attempt {
     private User user;
 
 
-    private int result;
+    private double result;
 
     public Attempt() {
     }
 
-    public Attempt(Long id, Quiz quiz, User user, int result) {
+    public Attempt(Long id, Quiz quiz, User user, double result) {
         this.id = id;
         this.quiz = quiz;
         this.user = user;
         this.result = result;
     }
 
-    public Attempt(Quiz quiz, User user, int result) {
+    public Attempt(Quiz quiz, User user, double result) {
         this.quiz = quiz;
         this.user = user;
         this.result = result;
@@ -60,11 +60,11 @@ public class Attempt {
         this.user = user;
     }
 
-    public int getResult() {
+    public double getResult() {
         return result;
     }
 
-    public void setResult(int result) {
+    public void setResult(double result) {
         this.result = result;
     }
 

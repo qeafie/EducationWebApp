@@ -118,7 +118,10 @@ public class QuizController {
                         @AuthenticationPrincipal User user){
         Quiz quiz = this.quizService.getQuiz(quizId);
         List<QuestionWithOption> list = this.questionService.getQuestionWithFormAnswer(quiz,quizForm);
-        int result =this.quizService.getResult(quiz,quizForm);
+
+        double result =this.quizService.getResult(quiz,quizForm);
+        double result1 = result1(list,quiz);
+        double percent1 =((result*100/quiz.getMaxMarks()));
 
         Attempt attempt = this.attemptService.addAttempt(new Attempt(quiz,user,result));
 
@@ -130,5 +133,16 @@ public class QuizController {
         model.addAttribute("questions",list);
         //добавить попытки
         return "view-result";
+    }
+
+    double result1(List<QuestionWithOption> questions, Quiz quiz){
+        double count=0;
+        double step =quiz.getScoresForQuestion();
+        for (QuestionWithOption question:
+             questions) {
+            if (question.getAnswer().equals(question.getFormAnswer()))
+                count+=step;
+        }
+        return count;
     }
 }

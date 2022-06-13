@@ -21,5 +21,5 @@ public interface QuizService {
 
     public List<Quiz> getActiveQuizzesOfCategory(Category category);
 
-    public int getResult(Quiz quiz, QuizForm quizForm);
+    public double getResult(Quiz quiz, QuizForm quizForm);
 }

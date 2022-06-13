@@ -101,9 +101,9 @@ public class Quiz {
         this.questions.add(question);
     }
 
-    public int getScoresForQuestion(){
+    public double getScoresForQuestion(){
         if (this.questions.size()==0) return maxMarks;
-        return maxMarks/this.questions.size();
+        return (double)maxMarks/ (double)this.questions.size();
     }
 
 //    public List<Attempt> getAttempts() {

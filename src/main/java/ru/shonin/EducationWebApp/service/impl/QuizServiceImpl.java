@@ -62,15 +62,15 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public int getResult(Quiz quiz, QuizForm quizForm) {
+    public double getResult(Quiz quiz, QuizForm quizForm) {
         Set<QuestionWithOption> questions = quiz.getQuestions();
         List<QuestionWithOption> quizFormQuestions = quizForm.getQuestions();
-        int count = 0;
-        final int STEP = quiz.getScoresForQuestion();
+        double count = 0;
+        final double STEP = quiz.getScoresForQuestion();
         for (QuestionWithOption question : quizFormQuestions){
             for (QuestionWithOption questionWithAnswer : questions){
 
-                if(question.getId() == questionWithAnswer.getId()){
+                if(question.getId().equals( questionWithAnswer.getId())){
                     if(question.getFormAnswer()!=null&&
                             question.getFormAnswer().equals(questionWithAnswer.getAnswer()))
                         count+=STEP;

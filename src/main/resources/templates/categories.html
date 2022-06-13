@@ -19,9 +19,16 @@
       <h4 th:text="${category.getTitle()}"></h4>
       <hr>
       <p  class="card-text" th:text="${category.getDescription()}"></p>
-      <form th:action="@{/category/update}" th:method="get" class="mb-2 mr-5">
-        <button class="btn btn-primary">Редактировать</button>
-      </form>
+      <div class="d-flex align-content justify-content-around">
+        <form th:action="'/category/edit/' + ${category.getId()}" th:method="get" class="mb-2 mr-5">
+          <button class="btn btn-primary">Редактировать</button>
+        </form>
+
+        <form th:action="'/category/delete/' + ${category.getId()}" th:method="post" class="mb-2 mr-5">
+          <button class="btn btn-primary">Удалить</button>
+        </form>
+      </div>
+
     </div>
   </div>
   <div class="row mt-2">

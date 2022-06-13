@@ -53,10 +53,10 @@ public class AttemptServiceImpl implements AttemptService {
     @Override
     public int getPosition(Attempt attempt,Quiz quiz) {
 
-        Map<Integer,List<Attempt>> attemptSet = this.attemptRepository.findByQuizOrderByResultDesc(quiz).stream()
+        Map<Double,List<Attempt>> attemptSet = this.attemptRepository.findByQuizOrderByResultDesc(quiz).stream()
                 .collect(Collectors.groupingBy(Attempt::getResult));
 
-        TreeSet<Integer> set = new TreeSet<>( attemptSet.keySet());
+        TreeSet<Double> set = new TreeSet<>( attemptSet.keySet());
 
         System.out.println( set.headSet(attempt.getResult()).size());
         System.out.println(set);

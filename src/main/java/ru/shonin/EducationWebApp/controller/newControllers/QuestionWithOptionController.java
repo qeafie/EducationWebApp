@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.shonin.EducationWebApp.entity.newTestComponent.Category;
 import ru.shonin.EducationWebApp.entity.newTestComponent.QuestionWithOption;
 import ru.shonin.EducationWebApp.entity.newTestComponent.Quiz;
 import ru.shonin.EducationWebApp.service.QuestionWithOptionService;
@@ -41,7 +42,7 @@ public class QuestionWithOptionController {
         question.setQuiz(quiz);
         quiz.addQuestion(this.questionService.addQuestion(question));
 
-        return "redirect:/quiz/all";
+        return "redirect:/question/quiz/all/"+quizId;
     }
 
     @GetMapping("/{questionId}")
@@ -77,5 +78,22 @@ public class QuestionWithOptionController {
         Set<QuestionWithOption> questions = this.questionService.getQuestionOfQuiz(quiz);
         model.addAttribute("questions", questions);
         return "view-questions";
+    }
+
+    @GetMapping("/edit/{questionId}")
+    public String editQuestion(Model model,
+                               @PathVariable Long questionId){
+        model.addAttribute("question",this.questionService.getQuestion(questionId));
+        return "edit-question";
+    }
+    @PostMapping("/edit/{quizID}")
+    public String editQuestion(@ModelAttribute QuestionWithOption question,
+                               @RequestParam String answerNumber,
+                               @PathVariable Long quizID){
+        question.setAnswer(question.getAnswerByNumber(Long.parseLong(answerNumber)));
+        QuestionWithOption question1 = this.questionService.updateQuestion(question);
+
+
+        return "redirect:/question/quiz/all/"+this.quizService.getQuiz(quizID).getId();
     }
 }

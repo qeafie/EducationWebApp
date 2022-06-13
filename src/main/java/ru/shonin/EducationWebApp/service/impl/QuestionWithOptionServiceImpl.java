@@ -66,13 +66,15 @@ public class QuestionWithOptionServiceImpl implements QuestionWithOptionService 
         for (QuestionWithOption q1: quizForm.getQuestions()) {
 
             for (QuestionWithOption q2:quiz.getQuestions()) {
-                if (q1.getId() == q2.getId()){
+                if (q1.getId().equals(q2.getId())){
+
                     q1.setAnswer(q2.getAnswer());
                     q1.setOption1(q2.getOption1());
                     q1.setOption2(q2.getOption2());
                     q1.setOption3(q2.getOption3());
                     q1.setOption4(q2.getOption4());
                     q1.setContent(q2.getContent());
+                    q1.setQuiz(q2.getQuiz());
                     list.add(q1);
                 }
             }

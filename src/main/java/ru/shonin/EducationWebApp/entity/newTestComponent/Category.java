@@ -59,4 +59,12 @@ public class Category {
     public void addQuiz(Quiz quiz){
         this.quizzes.add(quiz);
     }
+
+    public Set<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public void setQuizzes(Set<Quiz> quizzes) {
+        this.quizzes = quizzes;
+    }
 }

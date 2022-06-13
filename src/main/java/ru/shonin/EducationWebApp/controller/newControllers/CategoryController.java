@@ -43,4 +43,28 @@ public class CategoryController {
         return "error500";
     }
 
+
+    @GetMapping("/edit/{categoryId}")
+    public String editCategory(Model model,
+                               @PathVariable Long categoryId){
+        model.addAttribute("category",this.categoryService.getCategory(categoryId));
+        return "edit-category";
+    }
+    @PostMapping("/edit")
+    public String editCategory(@ModelAttribute Category category){
+        this.categoryService.updateCategory(category);
+        return "redirect:/category/all";
+    }
+
+
+    @PostMapping("/delete/{categoryId}")
+    public String deleteCategory(@PathVariable Long categoryId,Model model){
+        Category category = this.categoryService.getCategory(categoryId);
+        if (category.getQuizzes().size()==0){
+            this.categoryService.deleteCategory(categoryId);
+            model.addAttribute("message","Удаление успешно");
+        }
+        model.addAttribute("message","Удаление не возможно пока есть тесты с этой категорией");
+        return "redirect:/category/all";
+    }
 }

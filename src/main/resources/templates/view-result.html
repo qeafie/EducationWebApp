@@ -15,8 +15,10 @@
 
 <section>
     <h3 th:utext="'Ваш счёт: <b>'+${result}+'</b> / '+ ${maxResult}"></h3>
-<!--    возможно добавить место в таблице
-мол это лучше чем у % пользователей-->
+    <hr>
+    <h4 th:utext="'Ваша попытка лучше <b>' + ${percent} + ' </b> % попыток пользователей'"></h4>
+
+
     <div class="mt-2" th:each="question:${questions}">
         <h3 th:text="${question.getContent()}"></h3>
         <div class="d-flex justify-content-around">

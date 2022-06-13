@@ -19,6 +19,7 @@ import ru.shonin.EducationWebApp.service.QuizService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/quiz")
@@ -70,7 +71,7 @@ public class QuizController {
 
     @GetMapping("/active")
     public String getActiveQuiz (Model model){
-        model.addAttribute("quizzes",this.quizService.getActiveQuizzes());
+        model.addAttribute("quizzes",this.quizService.getActiveQuizzes().stream().filter(x->x.getQuestions().size()>0).collect(Collectors.toSet()));
         model.addAttribute("categories",this.categoryService.getCategories());
         model.addAttribute("currentCategory","All");
         return "view-quizzes";
@@ -81,7 +82,8 @@ public class QuizController {
         Category category = new Category();
         category.setId(categoryID);
 
-        model.addAttribute("quizzes",this.quizService.getActiveQuizzesOfCategory(category));
+        //пользователям выдаём только активные тесты с хотя бы 1 вопросом
+        model.addAttribute("quizzes",this.quizService.getActiveQuizzesOfCategory(category).stream().filter(x->x.getQuestions().size()>0).collect(Collectors.toList()));
         model.addAttribute("categories",this.categoryService.getCategories());
 
         model.addAttribute("currentCategory",this.categoryService.getCategory(categoryID).getTitle());
@@ -120,7 +122,7 @@ public class QuizController {
 
         Attempt attempt = this.attemptService.addAttempt(new Attempt(quiz,user,result));
 
-        model.addAttribute("percent",(100-this.attemptService.getPercent(quiz,attempt)));
+        model.addAttribute("percent",this.attemptService.getPercent(quiz,attempt));
         model.addAttribute("result", result);
         model.addAttribute("attempt",attempt);
         model.addAttribute("maxResult", quiz.getMaxMarks());

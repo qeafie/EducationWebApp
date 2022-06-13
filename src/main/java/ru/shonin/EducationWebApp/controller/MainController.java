@@ -28,27 +28,27 @@ public class MainController {
         return "greeting";
     }
 
-    @GetMapping("/home")
-    public String home(Model model){
-
-        model.addAttribute("quizzes",this.quizService.getQuizes());
-        model.addAttribute("categories",this.categoryService.getCategories());
-        model.addAttribute("currentCategory","All");
-        return "view-quizzes";
-    }
-
-    @GetMapping("/home/category/{categoryID}")
-    public String home(Model model, @PathVariable Long categoryID){
-        Category category = new Category();
-        category.setId(categoryID);
-
-        model.addAttribute("quizzes",this.quizService.getQuizzesOfCategory(category));
-        model.addAttribute("categories",this.categoryService.getCategories());
-
-
-        model.addAttribute("currentCategory",this.categoryService.getCategory(categoryID).getTitle());
-        return "view-quizzes";
-    }
+//    @GetMapping("/home")
+//    public String home(Model model){
+//
+//        model.addAttribute("quizzes",this.quizService.getQuizes());
+//        model.addAttribute("categories",this.categoryService.getCategories());
+//        model.addAttribute("currentCategory","All");
+//        return "view-quizzes";
+//    }
+//
+//    @GetMapping("/home/category/{categoryID}")
+//    public String home(Model model, @PathVariable Long categoryID){
+//        Category category = new Category();
+//        category.setId(categoryID);
+//
+//        model.addAttribute("quizzes",this.quizService.getQuizzesOfCategory(category));
+//        model.addAttribute("categories",this.categoryService.getCategories());
+//
+//
+//        model.addAttribute("currentCategory",this.categoryService.getCategory(categoryID).getTitle());
+//        return "view-quizzes";
+//    }
 
     @GetMapping("/admin")
     public String admin(){

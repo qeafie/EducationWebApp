@@ -10,6 +10,11 @@ import ru.shonin.EducationWebApp.repository.AttemptRepository;
 import ru.shonin.EducationWebApp.service.AttemptService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 @Service
 public class AttemptServiceImpl implements AttemptService {
 
@@ -38,14 +43,25 @@ public class AttemptServiceImpl implements AttemptService {
 
     @Override
     public int getPercent(Quiz quiz, Attempt attempt) {
-        int percent = 0;
+        int percent = 0;//100
         int countOfAttempt = this.attemptRepository.countAllByQuiz(quiz);
-        int indexOfAttempt = getPosition(attempt);
-        return (indexOfAttempt*100)/countOfAttempt;
+        int countOfAttempt2 = this.attemptRepository.findByQuiz(quiz).stream().collect(Collectors.groupingBy(Attempt::getResult)).size();
+        int indexOfAttempt = getPosition(attempt,quiz);
+        return ((indexOfAttempt*100)/countOfAttempt2);
     }
 
     @Override
-    public int getPosition(Attempt attempt) {
-        return this.attemptRepository.findAll(Sort.by(Sort.Direction.ASC,"result")).indexOf(attempt);
+    public int getPosition(Attempt attempt,Quiz quiz) {
+
+        Map<Integer,List<Attempt>> attemptSet = this.attemptRepository.findByQuizOrderByResultDesc(quiz).stream()
+                .collect(Collectors.groupingBy(Attempt::getResult));
+
+        TreeSet<Integer> set = new TreeSet<>( attemptSet.keySet());
+
+        System.out.println( set.headSet(attempt.getResult()).size());
+        System.out.println(set);
+        return set.headSet(attempt.getResult()).size();
+        //return this.attemptRepository.findByQuizOrderByResultDesc(quiz).indexOf(attempt);
+        //return this.attemptRepository.findAll(Sort.by(Sort.Direction.DESC,"result")).indexOf(attempt);
     }
 }

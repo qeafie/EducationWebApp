@@ -106,7 +106,8 @@ public class Quiz {
     }
 
     public int getScoresForQuestion(){
-        return maxMarks/questions.size();
+        if (this.questions.size()==0) return maxMarks;
+        return maxMarks/this.questions.size();
     }
 
 //    public List<Attempt> getAttempts() {

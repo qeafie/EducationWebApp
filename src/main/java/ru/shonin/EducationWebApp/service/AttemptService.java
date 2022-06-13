@@ -18,5 +18,5 @@ public interface AttemptService {
 
     public int getPercent (Quiz quiz,Attempt attempt);
 
-    public int getPosition(Attempt attempt);
+    public int getPosition(Attempt attempt,Quiz quiz);
 }

@@ -41,13 +41,13 @@
             <hr class="my-4">
             <div th:unless="${authenticated}">
                 <p>Пожалуйста авторизуйтесь</p>
-                <p class="lead">
+                <p class="lead" >
                     <a class="btn btn-primary btn-lg" th:href="@{/login}" role="button">Войти</a>
                 </p>
             </div>
 
-            <div}>
-                <a th:href="@{/quiz/active}" class="btn btn-primary px-2 text-white"> Уже авторизованы? - к тестам</a></li>
+            <div>
+                <a th:href="@{/quiz/active}" class="btn btn-primary px-2 text-white"> К тестам</a></li>
             </div>
 
 

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import ru.shonin.EducationWebApp.entity.Role;
 import ru.shonin.EducationWebApp.service.UserService;
 
 
@@ -30,10 +31,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/","/registration").permitAll()
+                    .antMatchers("/admin").hasAnyAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/category","/category/all", "/category/add",
+                        "/category/*","/category/edit/*,","category/edit","/category/delete/*").hasAnyAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/question","/question/*/add","/question/*",
+                        "/question/quiz/*","/question/quiz/all/*","/question/edit/*", "/question/delete/*").hasAnyAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/quiz/active","/quiz/category/active/*",
+                        "/quiz/instruction/*","/quiz/*/start","/quiz/*/start/test").hasAnyAuthority(Role.USER.getAuthority(),Role.ADMIN.getAuthority())
+                .antMatchers("/quiz/all","/quiz/add", "/quiz/edit/*", "/quiz/edit").hasAnyAuthority(Role.ADMIN.getAuthority())
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/quiz/active")
                     .permitAll()
                 .and()
                     .logout()

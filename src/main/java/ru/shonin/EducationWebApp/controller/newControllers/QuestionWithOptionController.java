@@ -96,4 +96,14 @@ public class QuestionWithOptionController {
 
         return "redirect:/question/quiz/all/"+this.quizService.getQuiz(quizID).getId();
     }
+
+
+    @PostMapping("/delete/{questionId}")
+    public String deleteQuestion(@PathVariable Long questionId,
+                                 Model model){
+        this.questionService.deleteQuestion(questionId);
+        model.addAttribute("message","Удаление успешно");
+
+        return "redirect:/";
+    }
 }

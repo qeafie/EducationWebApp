@@ -114,4 +114,8 @@ public class User implements UserDetails {
     public void setAttempts(List<Attempt> attempts) {
         this.attempts = attempts;
     }
+
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
 }

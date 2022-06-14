@@ -18,7 +18,7 @@ public class UserController {
     public String profile(@AuthenticationPrincipal User user,
                           Model model){
         model.addAttribute("user",user);
-        return "profile";
+        return "view-personal-account";
     }
 
     @GetMapping("user/{id}")
@@ -26,6 +26,6 @@ public class UserController {
                             Model model){
         User user = userRepository.findById(id).get();
         model.addAttribute("user",user);
-        return "profile";
+        return "view-personal-account";
     }
 }

@@ -135,6 +135,73 @@ public class QuizController {
         return "view-result";
     }
 
+
+
+
+    @GetMapping("/{quizId}/start/test")
+    public String startTest(@PathVariable Long quizId,
+                        Model model){
+        Quiz quiz = this.quizService.getQuiz(quizId);
+        QuizForm quizForm = new QuizForm();
+
+        List<QuestionWithOption> questions = new ArrayList<>(questionService.getShuffleQuestionOfQuiz(quiz));
+
+        //model.addAttribute("quizList",questionService.getShuffleQuestionOfQuiz(quiz));
+        model.addAttribute("form", new QuizForm(questions));
+        return "view-quiz-start-test";
+    }
+
+    @PostMapping("/{quizId}/start/test")
+    public String startTest(@PathVariable Long quizId,
+                        Model model,
+                        @ModelAttribute QuizForm quizForm,
+                        @AuthenticationPrincipal User user){
+        Quiz quiz = this.quizService.getQuiz(quizId);
+        List<QuestionWithOption> list = this.questionService.getQuestionWithFormAnswer(quiz,quizForm);
+
+        double result =this.quizService.getResult(quiz,quizForm);
+        //double result1 = result1(list,quiz);
+        //double percent1 =((result*100/quiz.getMaxMarks()));
+
+        //Attempt attempt = this.attemptService.addAttempt(new Attempt(quiz,user,result));
+
+        //model.addAttribute("percent",this.attemptService.getPercent(quiz,attempt));
+        model.addAttribute("percentOfSuccess",(result*100/quiz.getMaxMarks()));
+        model.addAttribute("result", result);
+        //model.addAttribute("attempt",attempt);
+        model.addAttribute("maxResult", quiz.getMaxMarks());
+        model.addAttribute("questions",list);
+        //добавить попытки
+        return "view-result-test";
+    }
+
+
+
+    @GetMapping("/edit/{quizId}")
+    public String editQuiz(Model model,
+                               @PathVariable Long quizId){
+        model.addAttribute("quiz",this.quizService.getQuiz(quizId));
+        model.addAttribute("categories",this.categoryService.getCategories());
+        return "edit-quiz";
+    }
+    @PostMapping("/edit")
+    public String editQuiz(@ModelAttribute Quiz quiz,
+                           @RequestParam Long categoryId){
+
+        Category category = this.categoryService.getCategory(categoryId);
+        Quiz quiz1 = this.quizService.getQuiz(quiz.getId());
+        quiz1.setCategory(category);
+        quiz1.setActive(quiz.isActive());
+        quiz1.setTitle(quiz.getTitle());
+        quiz1.setDescription(quiz.getDescription());
+        quiz1.setMaxMarks(quiz.getMaxMarks());
+
+        category.addQuiz(this.quizService.updateQuiz(quiz1));
+
+        return "redirect:/quiz/all";
+    }
+
+
     double result1(List<QuestionWithOption> questions, Quiz quiz){
         double count=0;
         double step =quiz.getScoresForQuestion();
